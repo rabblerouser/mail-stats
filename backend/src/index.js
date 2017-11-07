@@ -1,12 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const streamClient = require('./streamClient');
+const Store = require('./store');
+const queries = require('./queries');
 
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.sendStatus(200);
-});
+const store = new Store();
+streamClient.on('send-email', store.addCampaign);
+app.post('/events', streamClient.listen());
+
+const { getCampaigns } = queries(store);
+app.get('/campaigns', getCampaigns);
 
 const port = process.env.PORT;
 app.listen(port, () => {
