@@ -1,5 +1,6 @@
 {
   "name": "mail-stats-frontend",
+  "license": "AGPL-1.0",
   "version": "0.1.0",
   "dependencies": {
     "react": "^16.0.0",
@@ -20,6 +21,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0"
   },
+  "proxy": "http://mail-stats:3003",
   "eslintConfig": {
     "extends": "airbnb",
     "env": {

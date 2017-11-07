@@ -1,5 +1,6 @@
 {
   "name": "mail-stats",
+  "license": "AGPL-1.0",
   "version": "0.1.0",
   "dependencies": {
     "@rabblerouser/stream-client": "^0.8.8",

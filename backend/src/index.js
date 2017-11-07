@@ -12,7 +12,7 @@ streamClient.on('send-email', store.addCampaign);
 app.post('/events', streamClient.listen());
 
 const { getCampaigns } = queries(store);
-app.get('/campaigns', getCampaigns);
+app.get('/api/campaigns', getCampaigns);
 
 const port = process.env.PORT;
 app.listen(port, () => {
