@@ -3,6 +3,6 @@ services:
 - docker
 
 install: ./ci.sh build $TRAVIS_BUILD_NUMBER
-script: ./ci.sh test
+script: ./ci.sh test $TRAVIS_BUILD_NUMBER
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ./ci.sh push $TRAVIS_BUILD_NUMBER; fi

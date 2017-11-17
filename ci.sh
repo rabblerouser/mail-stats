@@ -11,10 +11,10 @@ case "$COMMAND" in
     cd ..
     ;;
   "test")
-    docker run rabblerouser/mail-stats yarn lint
-    docker run rabblerouser/mail-stats yarn test
-    docker run rabblerouser/mail-stats-frontend yarn lint
-    docker run -e CI=true rabblerouser/mail-stats-frontend yarn test
+    docker run rabblerouser/mail-stats:${BUILD_NUMBER} yarn lint
+    docker run rabblerouser/mail-stats:${BUILD_NUMBER} yarn test
+    docker run rabblerouser/mail-stats-frontend:${BUILD_NUMBER} yarn lint
+    docker run -e CI=true rabblerouser/mail-stats-frontend:${BUILD_NUMBER} yarn test
     ;;
   "push")
     docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
