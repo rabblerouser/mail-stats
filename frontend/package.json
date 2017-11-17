@@ -29,7 +29,14 @@
       "jest": true
     },
     "rules": {
-      "react/jsx-filename-extension": ["error", { "extensions": [".js"] }]
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js"
+          ]
+        }
+      ]
     }
   }
 }

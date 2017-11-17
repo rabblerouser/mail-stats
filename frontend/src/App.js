@@ -23,6 +23,7 @@ class App extends React.Component {
         <table>
           <thead>
             <tr>
+              <th>Date</th>
               <th>ID</th>
               <th>From</th>
               <th>Subject</th>
@@ -33,6 +34,7 @@ class App extends React.Component {
           <tbody>
             {this.state.campaigns.map(campaign => (
               <tr key={campaign.id}>
+                <td>{campaign.date}</td>
                 <td>{campaign.id}</td>
                 <td>{campaign.from}</td>
                 <td>{campaign.subject}</td>
