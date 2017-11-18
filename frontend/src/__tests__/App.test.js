@@ -4,11 +4,12 @@ import fetchMock from 'fetch-mock';
 import App from '../App';
 
 describe('App', () => {
-  it('renders an empty table', () => {
+  it('passes no campaigns down by default', () => {
     fetchMock.get('/api/campaigns', { campaigns: [] });
+
     const app = shallow(<App />);
 
-    expect(app.find('thead').find('tr')).toHaveLength(1);
-    expect(app.find('tbody').find('tr')).toHaveLength(0);
+    const table = app.find('CampaignTable');
+    expect(table).toHaveProp('campaigns', []);
   });
 });

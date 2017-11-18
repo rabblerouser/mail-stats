@@ -1,11 +1,10 @@
 import React from 'react';
+import CampaignTable from './CampaignTable';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      campaigns: [],
-    };
+    this.state = { campaigns: [] };
   }
 
   componentDidMount() {
@@ -15,37 +14,7 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <header >
-          <h1>Welcome to RR Mail Stats</h1>
-        </header>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>ID</th>
-              <th>From</th>
-              <th>Subject</th>
-              <th>To</th>
-              <th>S3 Key</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.campaigns.map(campaign => (
-              <tr key={campaign.id}>
-                <td>{campaign.date}</td>
-                <td>{campaign.id}</td>
-                <td>{campaign.from}</td>
-                <td>{campaign.subject}</td>
-                <td>{campaign.to}</td>
-                <td>{campaign.bodyLocation.key}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+    return <CampaignTable campaigns={this.state.campaigns} />;
   }
 }
 
