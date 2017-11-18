@@ -8,7 +8,9 @@ const app = express();
 app.use(bodyParser.json());
 
 const store = new Store();
-streamClient.on('send-email', store.addCampaign);
+streamClient.on('send-email', campaign => (
+  Promise.resolve(store.addCampaign(campaign))
+));
 app.post('/events', streamClient.listen());
 
 const { getCampaigns } = queries(store);

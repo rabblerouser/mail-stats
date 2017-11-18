@@ -7,7 +7,6 @@ class Store {
 
   addCampaign(campaign) {
     this.campaigns.push(campaign);
-    return Promise.resolve();
   }
 }
 
