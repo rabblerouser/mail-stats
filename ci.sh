@@ -9,6 +9,9 @@ case "$COMMAND" in
     cd ./backend && docker build --pull -t rabblerouser/mail-stats:${BUILD_NUMBER} .
     cd ../frontend && docker build --pull -t rabblerouser/mail-stats-frontend:${BUILD_NUMBER} .
     cd ..
+    # Build frontend assets and make them available outside the docker container
+    docker run --name assets rabblerouser/mail-stats-frontend:${BUILD_NUMBER} yarn build
+    docker cp assets:/app/build assets
     ;;
   "test")
     docker run rabblerouser/mail-stats:${BUILD_NUMBER} yarn lint
