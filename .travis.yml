@@ -2,6 +2,7 @@ sudo: required
 services:
 - docker
 
+before_install: pip install --upgrade --user awscli
 install: ./ci.sh build $TRAVIS_BUILD_NUMBER
 script: ./ci.sh test $TRAVIS_BUILD_NUMBER
 after_success:
