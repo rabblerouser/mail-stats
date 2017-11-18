@@ -14,7 +14,14 @@ class App extends React.Component {
   }
 
   render() {
-    return <CampaignTable campaigns={this.state.campaigns} />;
+    return (
+      <main>
+        <header >
+          <h1>Email campaigns</h1>
+        </header>
+        <CampaignTable campaigns={this.state.campaigns} />
+      </main>
+    );
   }
 }
 
