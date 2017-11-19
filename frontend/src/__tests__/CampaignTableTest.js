@@ -3,6 +3,8 @@ import { mount } from 'enzyme';
 import CampaignTable from '../CampaignTable';
 
 describe('CampaignTable', () => {
+  const recipients = { total: 0, successful: 0, failed: 0 };
+
   it('renders an empty table when there are no campaigns', () => {
     const table = mount(<CampaignTable campaigns={[]} />);
 
@@ -11,7 +13,7 @@ describe('CampaignTable', () => {
   });
 
   it('renders a row for each campaign', () => {
-    const campaigns = [{ id: 1, from: 'a@a.com', recipients: [] }, { id: 2, from: 'b@b.com', recipients: [] }];
+    const campaigns = [{ id: 1, from: 'a@a.com', recipients }, { id: 2, from: 'b@b.com', recipients }];
     const table = mount(<CampaignTable campaigns={campaigns} />);
 
     const trs = table.find('tbody').find('tr');
@@ -21,7 +23,7 @@ describe('CampaignTable', () => {
   });
 
   it('renders dates nicely, and handles missing dates', () => {
-    const table = mount(<CampaignTable campaigns={[{ id: 1, date: '2017-11-16T14:14:49.216Z', recipients: [] }]} />);
+    const table = mount(<CampaignTable campaigns={[{ id: 1, date: '2017-11-16T14:14:49.216Z', recipients }]} />);
 
     // Calling toLocaleDateString here is a bit tautological, but we can't write the actual
     // result here because we don't know what locale our tests will run in
@@ -31,7 +33,7 @@ describe('CampaignTable', () => {
   });
 
   it('does not blow up on missing dates', () => {
-    const table = mount(<CampaignTable campaigns={[{ id: 1, recipients: {} }]} />);
+    const table = mount(<CampaignTable campaigns={[{ id: 1, recipients }]} />);
 
     const time = table.find('time');
     expect(time).not.toIncludeText('Invalid Date');
@@ -41,6 +43,6 @@ describe('CampaignTable', () => {
     const campaign = { id: 1, recipients: { total: 23, successful: 18, failed: 3 } };
 
     const table = mount(<CampaignTable campaigns={[campaign]} />);
-    expect(table.find('tbody').find('tr')).toIncludeText('18 / 3 / 2');
+    expect(table.find('tbody').find('tr')).toIncludeText('1832');
   });
 });

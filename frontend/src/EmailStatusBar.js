@@ -12,9 +12,9 @@ const PercentageSpan = styled.span`
 const EmailStatusBar = ({ successful, failed, total }) => {
   const pending = total - successful - failed;
   return [
-    <PercentageSpan total={total} num={successful} color="#408D40">{successful}</PercentageSpan>,
-    <PercentageSpan total={total} num={failed} color="#EA4B4B">{failed}</PercentageSpan>,
-    <PercentageSpan total={total} num={pending} color="#EAEA4E">{pending}</PercentageSpan>,
+    <PercentageSpan total={total} num={successful} key="1" color="#408D40">{successful}</PercentageSpan>,
+    <PercentageSpan total={total} num={failed} key="2" color="#EA4B4B">{failed}</PercentageSpan>,
+    <PercentageSpan total={total} num={pending} key="3" color="#EAEA4E">{pending}</PercentageSpan>,
   ];
 };
 

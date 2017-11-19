@@ -35,6 +35,7 @@
       "jest": true
     },
     "rules": {
+      "max-len": ["error", 120],
       "react/jsx-filename-extension": [
         "error",
         {
