@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import EmailStatusBar from './EmailStatusBar';
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -40,13 +41,12 @@ const formatDate = isoDateString => (
 
 const Row = ({ campaign }) => {
   const { successful, failed, total } = campaign.recipients;
-  const pending = total - successful - failed;
   return (
     <Tr>
       <Td><time dateTime={campaign.date}>{formatDate(campaign.date)}</time></Td>
       <Td>{campaign.subject}</Td>
       <Td>{campaign.from}</Td>
-      <Td>{successful} / {failed} / {pending}</Td>
+      <Td><EmailStatusBar successful={successful} failed={failed} total={total} /></Td>
     </Tr>
   );
 };
