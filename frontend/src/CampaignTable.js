@@ -1,14 +1,34 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const THead = () => (
+const Table = styled.table`
+  border-collapse: collapse;
+`;
+
+const Th = styled.th`
+  text-align: left;
+  padding: 10px;
+`;
+
+const Td = styled.td`
+  border-width: 1px 0;
+  border-color: #DDDDDD;
+  border-style: solid;
+  padding: 10px;
+`;
+
+const Tr = styled.tr`
+  :hover {
+    background-color: #EFEFEF;
+  }
+`;
+
+const TableHead = () => (
   <thead>
     <tr>
-      <th>Date</th>
-      <th>ID</th>
-      <th>From</th>
-      <th>Subject</th>
-      <th>To</th>
-      <th>S3 Key</th>
+      <Th>Date</Th>
+      <Th>Subject</Th>
+      <Th>From</Th>
     </tr>
   </thead>
 );
@@ -18,17 +38,14 @@ const formatDate = isoDateString => (
 );
 
 const Row = ({ campaign }) => (
-  <tr>
-    <td><time dateTime={campaign.date}>{formatDate(campaign.date)}</time></td>
-    <td>{campaign.id}</td>
-    <td>{campaign.from}</td>
-    <td>{campaign.subject}</td>
-    <td>{campaign.to}</td>
-    <td>{(campaign.bodyLocation || {}).key}</td>
-  </tr>
+  <Tr>
+    <Td><time dateTime={campaign.date}>{formatDate(campaign.date)}</time></Td>
+    <Td>{campaign.subject}</Td>
+    <Td>{campaign.from}</Td>
+  </Tr>
 );
 
-const TBody = ({ campaigns }) => (
+const TableBody = ({ campaigns }) => (
   <tbody>
     {campaigns.map(campaign => (
       <Row key={campaign.id} campaign={campaign} />
@@ -37,10 +54,10 @@ const TBody = ({ campaigns }) => (
 );
 
 const CampaignTable = ({ campaigns }) => (
-  <table>
-    <THead />
-    <TBody campaigns={campaigns} />
-  </table>
+  <Table>
+    <TableHead />
+    <TableBody campaigns={campaigns} />
+  </Table>
 );
 
 export default CampaignTable;
