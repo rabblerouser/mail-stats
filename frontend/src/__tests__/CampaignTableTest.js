@@ -11,7 +11,8 @@ describe('CampaignTable', () => {
   });
 
   it('renders a row for each campaign', () => {
-    const table = mount(<CampaignTable campaigns={[{ id: 1, from: 'a@a.com' }, { id: 2, from: 'b@b.com' }]} />);
+    const campaigns = [{ id: 1, from: 'a@a.com', recipients: [] }, { id: 2, from: 'b@b.com', recipients: [] }];
+    const table = mount(<CampaignTable campaigns={campaigns} />);
 
     const trs = table.find('tbody').find('tr');
     expect(trs).toHaveLength(2);
@@ -20,7 +21,7 @@ describe('CampaignTable', () => {
   });
 
   it('renders dates nicely, and handles missing dates', () => {
-    const table = mount(<CampaignTable campaigns={[{ id: 1, date: '2017-11-16T14:14:49.216Z' }]} />);
+    const table = mount(<CampaignTable campaigns={[{ id: 1, date: '2017-11-16T14:14:49.216Z', recipients: [] }]} />);
 
     // Calling toLocaleDateString here is a bit tautological, but we can't write the actual
     // result here because we don't know what locale our tests will run in
@@ -30,9 +31,16 @@ describe('CampaignTable', () => {
   });
 
   it('does not blow up on missing dates', () => {
-    const table = mount(<CampaignTable campaigns={[{ id: 1 }]} />);
+    const table = mount(<CampaignTable campaigns={[{ id: 1, recipients: {} }]} />);
 
     const time = table.find('time');
     expect(time).not.toIncludeText('Invalid Date');
+  });
+
+  it('shows the sending status of emails', () => {
+    const campaign = { id: 1, recipients: { total: 23, successful: 18, failed: 3 } };
+
+    const table = mount(<CampaignTable campaigns={[campaign]} />);
+    expect(table.find('tbody').find('tr')).toIncludeText('18 / 3 / 2');
   });
 });

@@ -17,6 +17,12 @@ const store = new Store();
 streamClient.on('send-email', campaign => (
   Promise.resolve(store.addCampaign(campaign))
 ));
+streamClient.on('email-sent', campaign => (
+  Promise.resolve(store.addSuccessfulRecipients(campaign))
+));
+streamClient.on('email-failed', campaign => (
+  Promise.resolve(store.addFailedRecipients(campaign))
+));
 app.post('/events', streamClient.listen());
 
 const { getCampaigns } = queries(store);

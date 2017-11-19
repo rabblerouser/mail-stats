@@ -29,6 +29,7 @@ const TableHead = () => (
       <Th>Date</Th>
       <Th>Subject</Th>
       <Th>From</Th>
+      <Th>Sent / Failed / Pending</Th>
     </tr>
   </thead>
 );
@@ -37,13 +38,18 @@ const formatDate = isoDateString => (
   isoDateString && new Date(isoDateString).toLocaleDateString()
 );
 
-const Row = ({ campaign }) => (
-  <Tr>
-    <Td><time dateTime={campaign.date}>{formatDate(campaign.date)}</time></Td>
-    <Td>{campaign.subject}</Td>
-    <Td>{campaign.from}</Td>
-  </Tr>
-);
+const Row = ({ campaign }) => {
+  const { successful, failed, total } = campaign.recipients;
+  const pending = total - successful - failed;
+  return (
+    <Tr>
+      <Td><time dateTime={campaign.date}>{formatDate(campaign.date)}</time></Td>
+      <Td>{campaign.subject}</Td>
+      <Td>{campaign.from}</Td>
+      <Td>{successful} / {failed} / {pending}</Td>
+    </Tr>
+  );
+};
 
 const TableBody = ({ campaigns }) => (
   <tbody>
