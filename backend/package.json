@@ -2,6 +2,12 @@
   "name": "mail-stats",
   "license": "AGPL-1.0",
   "version": "0.1.0",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "lint": "eslint src",
+    "start": "node src/index.js",
+    "test": "NODE_ENV=test mocha -r src/__tests__/testGlobals.js --recursive src/__tests__"
+  },
   "dependencies": {
     "@rabblerouser/stream-client": "^0.8.8",
     "body-parser": "^1.18.2",
@@ -18,12 +24,6 @@
     "nodemon": "^1.12.1",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0"
-  },
-  "scripts": {
-    "dev": "nodemon src/index.js",
-    "lint": "eslint src",
-    "start": "node src/index.js",
-    "test": "NODE_ENV=test mocha -r src/__tests__/testGlobals.js --recursive src/__tests__"
   },
   "eslintConfig": {
     "extends": "airbnb-base",
