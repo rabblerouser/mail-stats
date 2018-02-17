@@ -3,7 +3,7 @@
   "license": "AGPL-1.0",
   "version": "0.1.0",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon -L src/index.js",
     "lint": "eslint src",
     "start": "node src/index.js",
     "test": "NODE_ENV=test mocha -r src/__tests__/testGlobals.js --recursive src/__tests__"
