@@ -1,5 +1,6 @@
 const createClient = require('@rabblerouser/stream-client');
 const config = require('./config');
+const logger = require('./logger');
 
 module.exports = createClient({
   publishToStream: config.streamName,
@@ -12,4 +13,6 @@ module.exports = createClient({
 
   kinesisEndpoint: config.kinesisEndpoint,
   s3Endpoint: config.s3Endpoint,
+
+  logger,
 });

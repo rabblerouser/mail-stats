@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));
+  app.use(morgan('[:date[iso]] :method :url :status :response-time ms'));
 }
 
 const store = new Store();
@@ -30,5 +30,5 @@ app.get('/api/campaigns', getCampaigns);
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  logger.info('Listening on port', port);
+  logger.info(`Listening on port ${port}`);
 });
