@@ -9,7 +9,7 @@
     "test": "NODE_ENV=test mocha -r src/__tests__/testGlobals.js --recursive src/__tests__"
   },
   "dependencies": {
-    "@rabblerouser/stream-client": "^0.8.13",
+    "@rabblerouser/stream-client": "^0.8.14",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
