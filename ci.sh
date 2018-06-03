@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -exuo pipefail
 
 VERSION="${TRAVIS_BUILD_NUMBER}"
 BACKEND_IMAGE='rabblerouser/mail-stats'
@@ -22,6 +22,7 @@ docker run ${FRONTEND_IMAGE} yarn lint
 docker run -e CI=true ${FRONTEND_IMAGE} yarn test
 docker run --name assets ${FRONTEND_IMAGE} yarn build
 docker cp assets:/app/build assets
+ls -la
 cd ..
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -29,5 +30,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; th
   docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
   docker push ${BACKEND_IMAGE}
   docker push ${FRONTEND_IMAGE}
+  ls -la
   aws s3 cp --recursive assets ${S3_DESTINATION}
 fi
